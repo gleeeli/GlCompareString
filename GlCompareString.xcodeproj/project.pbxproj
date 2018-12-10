@@ -13,6 +13,9 @@
 		197F8D7F217D55E2003234B9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 197F8D7E217D55E2003234B9 /* Assets.xcassets */; };
 		197F8D82217D55E2003234B9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 197F8D80217D55E2003234B9 /* LaunchScreen.storyboard */; };
 		197F8D85217D55E2003234B9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 197F8D84217D55E2003234B9 /* main.m */; };
+		197F8D8E217D56B8003234B9 /* GlTwoTextEditDistance.m in Sources */ = {isa = PBXBuildFile; fileRef = 197F8D8C217D56B8003234B9 /* GlTwoTextEditDistance.m */; };
+		197F8D94217D5839003234B9 /* GlCompareTextModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 197F8D92217D5839003234B9 /* GlCompareTextModel.m */; };
+		197F8D95217D5839003234B9 /* GlCompareTwoText.m in Sources */ = {isa = PBXBuildFile; fileRef = 197F8D93217D5839003234B9 /* GlCompareTwoText.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +29,12 @@
 		197F8D81217D55E2003234B9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		197F8D83217D55E2003234B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		197F8D84217D55E2003234B9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		197F8D8C217D56B8003234B9 /* GlTwoTextEditDistance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlTwoTextEditDistance.m; sourceTree = "<group>"; };
+		197F8D8D217D56B8003234B9 /* GlTwoTextEditDistance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlTwoTextEditDistance.h; sourceTree = "<group>"; };
+		197F8D90217D5839003234B9 /* GlCompareTextModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlCompareTextModel.h; sourceTree = "<group>"; };
+		197F8D91217D5839003234B9 /* GlCompareTwoText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlCompareTwoText.h; sourceTree = "<group>"; };
+		197F8D92217D5839003234B9 /* GlCompareTextModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlCompareTextModel.m; sourceTree = "<group>"; };
+		197F8D93217D5839003234B9 /* GlCompareTwoText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlCompareTwoText.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +67,8 @@
 		197F8D74217D55E0003234B9 /* GlCompareString */ = {
 			isa = PBXGroup;
 			children = (
+				197F8D8F217D57C4003234B9 /* RecursiveExhaustive */,
+				197F8D8B217D55FD003234B9 /* GlTextEditDistance */,
 				197F8D75217D55E0003234B9 /* AppDelegate.h */,
 				197F8D76217D55E0003234B9 /* AppDelegate.m */,
 				197F8D78217D55E0003234B9 /* ViewController.h */,
@@ -69,6 +80,26 @@
 				197F8D84217D55E2003234B9 /* main.m */,
 			);
 			path = GlCompareString;
+			sourceTree = "<group>";
+		};
+		197F8D8B217D55FD003234B9 /* GlTextEditDistance */ = {
+			isa = PBXGroup;
+			children = (
+				197F8D8D217D56B8003234B9 /* GlTwoTextEditDistance.h */,
+				197F8D8C217D56B8003234B9 /* GlTwoTextEditDistance.m */,
+			);
+			path = GlTextEditDistance;
+			sourceTree = "<group>";
+		};
+		197F8D8F217D57C4003234B9 /* RecursiveExhaustive */ = {
+			isa = PBXGroup;
+			children = (
+				197F8D90217D5839003234B9 /* GlCompareTextModel.h */,
+				197F8D92217D5839003234B9 /* GlCompareTextModel.m */,
+				197F8D91217D5839003234B9 /* GlCompareTwoText.h */,
+				197F8D93217D5839003234B9 /* GlCompareTwoText.m */,
+			);
+			path = RecursiveExhaustive;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -141,8 +172,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				197F8D94217D5839003234B9 /* GlCompareTextModel.m in Sources */,
 				197F8D7A217D55E0003234B9 /* ViewController.m in Sources */,
+				197F8D8E217D56B8003234B9 /* GlTwoTextEditDistance.m in Sources */,
 				197F8D85217D55E2003234B9 /* main.m in Sources */,
+				197F8D95217D5839003234B9 /* GlCompareTwoText.m in Sources */,
 				197F8D77217D55E0003234B9 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -287,6 +321,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = GlCompareString/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -303,6 +338,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = GlCompareString/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
