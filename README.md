@@ -10,6 +10,7 @@
 
  __weak typeof(self) weakSelf = self;
     //方法一
+    
     self.compareByDistance = [[GlTwoTextEditDistance alloc] init];
     
     NSInteger allcount = text1.length;
