@@ -6,6 +6,8 @@
 
 
 使用方法：
+
+
  __weak typeof(self) weakSelf = self;
     //方法一
     self.compareByDistance = [[GlTwoTextEditDistance alloc] init];
