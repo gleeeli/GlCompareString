@@ -30,8 +30,8 @@
     
 //    NSString *text1 = @"cafe 你现在认识不到互联网项目的好处，就是因为你的思维还没有到位";
 //    NSString *text2 = @"icoffee 你gleeeli现在认识不gleeeli到互联网项目的好处";
-    NSString *text1 = @"你现在认识不到互联网项目的好处，就是因为你的思维还没有到位，比如很多富翁都是干互联网的，比如马云，比如马化腾，当然还有很多世界级的首富，都是干互联网的，你只是看见他们赚钱，却不去想他们为什么赚钱";
-    NSString *text2 = @"你现在认识不到互联网项目的好处，因为你的思维还没有到位，比如很多富翁都是干互联网的，比如马云，比如马化腾，当然还有很多世界级的首富，都是干互联网的，你只是看见他们赚钱，却不去想他们为什么赚钱";
+    NSString *text1 = @"你现在认识不到互联网项目的好处，就是因为你的思维还没有到位，比如很多富翁都是干互联网的，比如马云，比如马化腾，当然还有很多世界级的首富，都是干互联网的，你只是看见他们赚钱，却不想他们为什么赚钱";
+    NSString *text2 = @"你现在认识不到物联网项目的好处，因为你的思维还没有到位，比如很多富翁都是干互联网的，比如马云，比如马化腾，当然还有很多世界级的首富，都是干互联网的，你只是看见他们赚钱，却不去想他们为什么赚钱";
     
     self.rightTextLabel.text = text1;//正确的文本
     self.matchTextLabel.text = text2;
@@ -41,18 +41,25 @@
     //方法一
     self.compareByDistance = [[GlTwoTextEditDistance alloc] init];
     
+    NSInteger allcount = text1.length;
+//    for (int i = 0; i < 20; i++) {
     
-    for (int i = 0; i < 20; i++) {
-        
+    
         [self.compareByDistance editDistanceOC:text2 rightStr:text1];
         self.compareByDistance.completeAllBlock = ^(NSInteger minDistance, NSArray<GlEditDistanceModel *> * _Nonnull stepArray, NSString * _Nonnull matchStr) {
-            NSLog(@"最小距离:%zd",minDistance);
-            [weakSelf printAllStepWithStepArray:stepArray minDistance:minDistance];
+            CGFloat simililarity = 1 - minDistance /(CGFloat)allcount;
+            if (simililarity < 0) {
+                simililarity = 0;
+            }else if(simililarity > 1) {
+                simililarity = 1;
+            }
+            NSLog(@"最小距离:%zd,相似度:%f",minDistance,simililarity);
+            [weakSelf printAllStepWithStepArray:stepArray minDistance:minDistance simililarity:simililarity];
         };
         
-        NSInteger length = text2.length - 1;
-        text2 = [text2 substringWithRange:NSMakeRange(0, length)];
-    }
+//        NSInteger length = text2.length - 1;
+//        text2 = [text2 substringWithRange:NSMakeRange(0, length)];
+//    }
     
     //方法二
 //    self.compareByExhaustive = [[GlCompareTwoText alloc] init];
@@ -65,12 +72,13 @@
     
 }
 
-- (void)printAllStepWithStepArray:(NSArray *)stepArray minDistance:(NSInteger)minDistance{
+- (void)printAllStepWithStepArray:(NSArray *)stepArray minDistance:(NSInteger)minDistance simililarity:(CGFloat)simililarity{
     NSLog(@"*************************Method One*************************");
     NSString *str2= self.rightTextLabel.text;//正确文本
     NSString *str1 = self.matchTextLabel.text;
     
     NSMutableAttributedString *muStr = [[NSMutableAttributedString alloc] initWithString:str1];
+    NSMutableAttributedString *rmuStr = [[NSMutableAttributedString alloc] initWithString:str2];
     
     NSString *sameStr = @"";
     for (long i = [stepArray count] - 1; i >=0 ; i --) {
@@ -81,6 +89,9 @@
             sameStr = [NSString stringWithFormat:@"%@%@",sameStr,icur];
             NSRange range = NSMakeRange(model.iCursor - 1, 1);
             [muStr addAttribute:NSForegroundColorAttributeName value:[UIColor greenColor] range:range];
+            
+            NSRange rRange = NSMakeRange(model.jCursor - 1, 1);
+            [rmuStr addAttribute:NSForegroundColorAttributeName value:[UIColor greenColor] range:rRange];
         }
         
         //下面打印具体的每一步操作
@@ -111,9 +122,10 @@
     GlDebugLog(@"相同的字段为:%@",sameStr);
     
     self.matchTextLabel.attributedText = muStr;
+    self.rightTextLabel.attributedText = rmuStr;
     
     NSTimeInterval completeTime = [[NSDate date] timeIntervalSince1970];
-    NSString *result = [NSString stringWithFormat:@"（绿色为匹配正确的字符）\n错误个数或最小距离：%zd\n耗时：%f",minDistance,(completeTime - self.startTime)];
+    NSString *result = [NSString stringWithFormat:@"（绿色为匹配正确的字符）\n错误个数或最小距离：%zd\n相似度:%.1f%%\n耗时：%f",minDistance,simililarity * 100,(completeTime - self.startTime)];
     self.methodOneResultLabel.text = result;
     NSLog(@"*************************Method One End*************************");
 }
